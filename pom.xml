@@ -55,8 +55,7 @@
                     <archive>
                         <manifest>
                             <addClasspath>true</addClasspath>
-                            <classpathPrefix>lib/</classpathPrefix>
-                            <mainClass>Main.java</mainClass>
+                            <mainClass>com.yurima.remotereceiver.Main</mainClass>
                         </manifest>
                     </archive>
                 </configuration>

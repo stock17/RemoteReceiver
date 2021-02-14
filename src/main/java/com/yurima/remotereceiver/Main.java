@@ -10,7 +10,7 @@ import java.util.concurrent.Executors;
 public class Main {
 
     private static final int DEFAULT_PORT = 9876;
-    private static final int MAX_PORT = 9876;
+    private static final int MAX_PORT = 65535;
 
     public static void main(String[] args) throws IOException {
         int port = getPort(args);

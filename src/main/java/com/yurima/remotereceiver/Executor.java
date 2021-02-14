@@ -20,6 +20,7 @@ public class Executor {
                 break;
             case PRESS_KEY:
                 Jwinapi.pressKey((int)command.getValue());
+                break;
             case SLEEP:
                 Jwinapi.sleepMode();
                 break;

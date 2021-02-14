@@ -1,6 +1,8 @@
 package com.yurima.remotereceiver;
 
 import java.io.IOException;
+import java.util.concurrent.ExecutorService;
+import java.util.concurrent.Executors;
 
 /**
  * The class creates and starts Receiver process
@@ -13,7 +15,8 @@ public class Main {
     public static void main(String[] args) throws IOException {
         int port = getPort(args);
         Receiver receiver = new Receiver(port, new Executor());
-        receiver.connect();
+        ExecutorService executor = Executors.newSingleThreadExecutor();
+        executor.submit(receiver);
     }
 
     private static int getPort(String[] args) {

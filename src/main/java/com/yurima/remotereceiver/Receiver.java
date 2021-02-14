@@ -12,10 +12,11 @@ import java.net.Socket;
 /**
  * The class receives messages (commands) from RemoteManager service sends them to execute
  */
-public class Receiver {
+public class Receiver implements Runnable {
 
     private final int port;
     private final Executor executor;
+    private ServerSocket serverSocket;
 
     public Receiver(int port, Executor executor) {
         this.port = port;
@@ -25,8 +26,14 @@ public class Receiver {
     /**
      * The method creates a server socket and accepts connections.
      */
-    public void connect() throws IOException {
-        ServerSocket serverSocket = new ServerSocket(this.port);
+    @Override
+    public void run(){
+        try {
+            serverSocket = new ServerSocket(this.port);
+        } catch (IOException e) {
+            e.printStackTrace();
+            System.exit(-1);
+        }
         while (true) {
             try (Socket socket = serverSocket.accept();
                  ObjectOutputStream oos = new ObjectOutputStream((socket.getOutputStream()));

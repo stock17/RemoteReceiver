@@ -15,19 +15,18 @@ import java.net.Socket;
 public class Receiver {
 
     private final int port;
-    private final Executor executor = new Executor();
+    private final Executor executor;
 
-    private ServerSocket serverSocket;
-
-    public Receiver(int port) {
+    public Receiver(int port, Executor executor) {
         this.port = port;
+        this.executor = executor;
     }
 
     /**
      * The method creates a server socket and accepts connections.
      */
     public void connect() throws IOException {
-        serverSocket = new ServerSocket(this.port);
+        ServerSocket serverSocket = new ServerSocket(this.port);
         while (true) {
             try (Socket socket = serverSocket.accept();
                  ObjectOutputStream oos = new ObjectOutputStream((socket.getOutputStream()));

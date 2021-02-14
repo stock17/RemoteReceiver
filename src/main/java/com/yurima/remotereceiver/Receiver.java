@@ -17,6 +17,7 @@ import java.net.Socket;
 public class Receiver {
 
     private final int port;
+    private final Executor executor = new Executor();
 
     private ServerSocket serverSocket;
     private Socket socket;
@@ -46,7 +47,7 @@ public class Receiver {
                 objectOutputStream.flush();
                 Command command;
                 while ((command = (Command) objectInputStream.readObject()) != null) {
-                    exec(command);
+                    executor.execute(command);
                 }
 
             } catch (IOException | ClassNotFoundException e) {
@@ -57,37 +58,17 @@ public class Receiver {
                 } catch (IOException e) {
                     e.printStackTrace();
                 }
-
             }
         }
     }
 
-    /**
-     * The method executes the received commands
-     * @param command
-     */
-    private void exec(Command command) {
-        switch (command.getType()) {
-            case VOLUME_LEVEL:
-                Jwinapi.setVolumeLevel(command.getValue());
-                break;
-            case SLEEP:
-                Jwinapi.sleepMode();
-                break;
-        }
-
-    }
-
     private boolean closeAll() throws IOException {
-
         if (objectInputStream != null) objectInputStream.close();
         if (inputStream != null) inputStream.close();
         if (objectOutputStream != null) objectOutputStream.close();
         if (outputStream != null) outputStream.close();
         if (socket != null) socket.close();
         if (serverSocket != null) serverSocket.close();
-
         return true;
-
     }
 }

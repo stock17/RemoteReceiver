@@ -11,6 +11,9 @@ import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
 
+/**
+ * The class receives messages (commands) from RemoteManager service and execute them
+ */
 public class Receiver {
 
     private final int port;
@@ -26,6 +29,9 @@ public class Receiver {
         this.port = port;
     }
 
+    /**
+     * The method creates a server socket and accepts connections.
+     */
     public void connect()  {
         while (true) {
             try {
@@ -56,6 +62,10 @@ public class Receiver {
         }
     }
 
+    /**
+     * The method executes the received commands
+     * @param command
+     */
     private void exec(Command command) {
         switch (command.getType()) {
             case VOLUME_LEVEL:

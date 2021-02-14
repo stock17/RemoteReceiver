@@ -21,6 +21,11 @@
             <version>1.0</version>
         </dependency>
         <dependency>
+            <groupId>com.yurima</groupId>
+            <artifactId>remote-utils</artifactId>
+            <version>1.0</version>
+        </dependency>
+        <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter-engine</artifactId>
             <version>${junit.version}</version>

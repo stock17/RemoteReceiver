@@ -1,7 +1,8 @@
 package com.yurima.remotereceiver;
 
 import com.yurima.jwinapi.Jwinapi;
-import main.java.com.example.remotemanager.Command;
+import com.yurima.remoteutils.Command;
+
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.ObjectInputStream;
@@ -26,24 +27,18 @@ public class Receiver {
     }
 
     public void connect()  {
-
         while (true) {
             try {
                 serverSocket = new ServerSocket(this.port);
                 socket = serverSocket.accept();
                 System.out.println("Connected");
-
                 outputStream = socket.getOutputStream();
                 inputStream = socket.getInputStream();
-
                 objectOutputStream = new ObjectOutputStream((outputStream));
                 objectInputStream = new ObjectInputStream((inputStream));
-
-                objectOutputStream.writeDouble(Jwinapi.getVolumeLevel());
+                objectOutputStream.writeObject(new Command(Command.Type.VOLUME_LEVEL, Jwinapi.getVolumeLevel()));
                 objectOutputStream.flush();
-
                 Command command;
-
                 while ((command = (Command) objectInputStream.readObject()) != null) {
                     exec(command);
                 }

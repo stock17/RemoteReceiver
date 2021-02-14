@@ -12,7 +12,7 @@ import java.net.Socket;
 
 public class Receiver {
 
-    private static final int PORT = 9876;
+    private final int port;
 
     private ServerSocket serverSocket;
     private Socket socket;
@@ -21,11 +21,15 @@ public class Receiver {
     private ObjectInputStream objectInputStream;
     private ObjectOutputStream objectOutputStream;
 
+    public Receiver(int port) {
+        this.port = port;
+    }
+
     public void connect()  {
 
         while (true) {
             try {
-                serverSocket = new ServerSocket(PORT);
+                serverSocket = new ServerSocket(this.port);
                 socket = serverSocket.accept();
                 System.out.println("Connected");
 
@@ -44,9 +48,7 @@ public class Receiver {
                     exec(command);
                 }
 
-            } catch (IOException e) {
-                e.printStackTrace();
-            } catch (ClassNotFoundException e) {
+            } catch (IOException | ClassNotFoundException e) {
                 e.printStackTrace();
             } finally {
                 try {

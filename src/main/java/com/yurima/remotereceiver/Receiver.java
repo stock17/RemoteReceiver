@@ -1,13 +1,14 @@
-package com.company;
+package com.yurima.remotereceiver;
 
-import com.example.remotemanager.Command;
-import com.mymos.jwinapi.Jwinapi;
-
-import java.io.*;
+import com.yurima.jwinapi.Jwinapi;
+import main.java.com.example.remotemanager.Command;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.ObjectInputStream;
+import java.io.ObjectOutputStream;
+import java.io.OutputStream;
 import java.net.ServerSocket;
 import java.net.Socket;
-
-
 
 public class Receiver {
 
@@ -23,7 +24,6 @@ public class Receiver {
     public void connect()  {
 
         while (true) {
-
             try {
                 serverSocket = new ServerSocket(PORT);
                 socket = serverSocket.accept();
@@ -66,15 +66,6 @@ public class Receiver {
                 break;
             case SLEEP:
                 Jwinapi.sleepMode();
-                break;
-            case PRESS_SPACE_KEY:
-                Jwinapi.pressSpaceKey();
-                break;
-            case PRESS_LEFT_KEY:
-                Jwinapi.pressLeftKey();
-                break;
-            case PRESS_RIGHT_KEY:
-                Jwinapi.pressRightKey();
                 break;
         }
 

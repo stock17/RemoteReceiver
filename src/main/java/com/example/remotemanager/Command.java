@@ -1,4 +1,4 @@
-package com.example.remotemanager;
+package main.java.com.example.remotemanager;
 
 
 import java.io.Serializable;
